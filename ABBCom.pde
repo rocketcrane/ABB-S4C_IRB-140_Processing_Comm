@@ -1,5 +1,7 @@
 import processing.serial.*;
 
+//MESSAGE FORMAT: "xx [message] #\n"
+//xx = two-digit integer
 class ABBCom {
   Serial myPort;
   
@@ -20,7 +22,7 @@ class ABBCom {
   void writeTP(String input) {
     String msg = "88 " + input + " #\n";
     myPort.write(msg);
-    println("Attempted writing to teach pendant:", msg);
+    println("Attempted writing to teach pendant, message:", msg);
   } //end function writeTP()
   
   void close() {
