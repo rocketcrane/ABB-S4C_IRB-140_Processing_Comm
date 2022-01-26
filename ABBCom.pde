@@ -10,7 +10,7 @@ class ABBCom {
     println("Available Ports: ");
     printArray(Serial.list());
     if(Serial.list().length <= portIndex) {
-      println("Invalid port index");
+      println("Invalid port index, exiting program...");
       System.exit(-1);
     }
     String portName = Serial.list()[portIndex];

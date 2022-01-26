@@ -2,17 +2,25 @@
   VERSION:1
   LANGUAGE:ENGLISH
 %%%
+MODULE SERVER
 
 VAR iodev readChan;
 VAR iodev writeChan;
 VAR string input;
+VAR string message;
+VAR num code;
 
 PROC parseMsg(string msg)
 	VAR num length;
-	VAR num newInd;
-	VAR string message;
+	VAR bool ok;
 	length := StrMatch(msg, 1, "#");
-	message := StrPart(msg, 4, length - 2);
+	ok := StrToVal(StrPart(msg, 1, 2), code);
+	IF length > 5 THEN
+		message := StrPart(msg, 4, length - 2);
+	ELSE
+		message := "null";
+	ENDIF
+ENDPROC
 
 PROC main()
 	Open "COM3",readChan\Read;
@@ -20,13 +28,16 @@ PROC main()
 	WHILE TRUE DO
 		Write writeChan,"Hello World";
 		input := ReadStr(readChan);
-		tpWrite input;
+		parseMsg input;
+		tpWrite "code is: ";
+		tpWrite code;
+		tpWrite "message is: ";
+		tpWrite message;
 	ENDWHILE
-Close readChan;
-Close writeChan;
-
-	
+	Close readChan;
+	Close writeChan;
 ENDPROC
+
 ENDMODULE
 
 
