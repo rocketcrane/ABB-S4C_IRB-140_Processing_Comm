@@ -11,8 +11,7 @@ void draw() {
 
 void mousePressed() {
   if (mousePressed && (mouseButton == LEFT)) {
-    com.writeTP("Hello World");
-    com.readMsg();
+    com.writeTP("I am a robot");
   } else if (mousePressed && (mouseButton == RIGHT)) {
     com.close();
   } else {

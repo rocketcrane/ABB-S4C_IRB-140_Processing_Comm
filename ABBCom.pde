@@ -23,6 +23,7 @@ class ABBCom {
     String msg = "88 " + input + " #\n";
     myPort.write(msg);
     println("Attempted writing to teach pendant, message:", msg);
+    readMsg();
   } //end function writeTP()
   
   void readMsg() {
@@ -33,8 +34,7 @@ class ABBCom {
   void close() {
     String msg = "99 #\n";
     myPort.write(msg);
-    String response = myPort.readStringUntil(10); //ASCII linefeed
-    println(response);
+    readMsg();
     myPort.stop();
     println("Attempted disconnection from ABB robot, message:", msg);
     exit();
