@@ -14,7 +14,7 @@ class ABBCom {
       System.exit(-1);
     }
     String portName = Serial.list()[portIndex];
-    tempPort = new Serial(theSketch, portName, 9600);
+    tempPort = new Serial(theSketch, portName, 9600, 'N', 8, 1.0);
     myPort = tempPort;
     println("Attempted to connect to robot at port", portIndex);
   } //end function startSerial()
@@ -24,6 +24,11 @@ class ABBCom {
     myPort.write(msg);
     println("Attempted writing to teach pendant, message:", msg);
   } //end function writeTP()
+  
+  void readMsg() {
+    String response = myPort.readStringUntil('\n');
+    println("Message from robot:", response);
+  } //end function readMsg()
   
   void close() {
     String msg = "99 #\n";
