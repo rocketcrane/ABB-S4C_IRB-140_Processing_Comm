@@ -24,8 +24,8 @@ PROC parseMsg(string msg)
 ENDPROC
 
 PROC main()
-	Open "COM3",readChan\Read;
-	Open "COM3",writeChan\Write;
+	Open "COM2",readChan\Read;
+	Open "COM2",writeChan\Write;
 	WHILE TRUE DO
 		Write writeChan,"Hello World";
 		input := ReadStr(readChan);
