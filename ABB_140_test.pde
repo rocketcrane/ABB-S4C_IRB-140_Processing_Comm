@@ -1,6 +1,6 @@
 ABBCom com;
 int port = 0; //port number the robot is connected to
-Pose target1 = new Pose(new PVector(0,0,0),new Quaternion(0,-1,0,0));
+Pose target1 = new Pose(new PVector(130,-56,-36),new Quaternion(0.6,-0.5,-0.4,-0.3));
 Pose target2 = new Pose(new PVector(0,0,200),new Quaternion(0,-1,0,0));
 
 

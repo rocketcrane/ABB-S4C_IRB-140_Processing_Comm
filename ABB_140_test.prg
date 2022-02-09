@@ -1,9 +1,4 @@
-%%%
-  VERSION:1
-  LANGUAGE:ENGLISH
-%%%
-
-MODULE SERVER
+MODULE ABBSERVER
   VAR iodev readChan;
   VAR iodev writeChan;
   VAR string message;
@@ -11,15 +6,13 @@ MODULE SERVER
   VAR string input;
   VAR num code;
   PERS tooldata gripper:=[TRUE,[[0,0,500],[1,0,0,0]],[0.001,[0,0,0.001],[1,0,0,0],0,0,0]];
-  PERS wobjdata wall:=[FALSE,TRUE,"",[[-271.694,-1031.52,406.486],[0.000446,-1,4.6E-05,4.6E-05]],[[0,0,0],[1,0,0,0]]];
+  PERS wobjdata wall:=[FALSE,TRUE,"",[[0,0,0],[1,0,0,0]],[[0,0,0],[1,0,0,0]]];
   !PERS speeddata currentSpeed;
   !PERS zonedata currentZone;
   VAR robtarget currentTarget;
   VAR num params{7};
 
-  PROC parseMsg(
-    string msg)
-
+  PROC parseMsg(string msg)
     VAR bool ok;
     VAR num length;
     VAR num acc:=1;
@@ -46,11 +39,17 @@ MODULE SERVER
     ENDIF
   ENDPROC
 
+  PROC initialize()
+    wall:=[FALSE,TRUE,"",[[-271.694,-1031.52,406.486],[0.000446,-1,4.6E-05,4.6E-05]],[[0,0,0],[1,0,0,0]]];
+    gripper:=[TRUE,[[0,0,500],[1,0,0,0]],[0.001,[0,0,0.001],[1,0,0,0],0,0,0]];
+  ENDPROC
+
   PROC main()
     !Motion configuration
     ConfL\Off;
     Open "COM2",readChan\Read;
     Open "COM2",writeChan\Write;
+    initialize;
     WHILE TRUE DO
       input:=ReadStr(readChan);
       parseMsg input;
@@ -80,4 +79,3 @@ MODULE SERVER
     Close writeChan;
   ENDPROC
 ENDMODULE
-
